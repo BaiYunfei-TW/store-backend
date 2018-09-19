@@ -40,11 +40,11 @@ public class ProductsTest {
         assertThat(productList.size(), is(2));
 
         Product product = productList.get(0);
-        assertThat(product.getName(), is("可乐"));
-        assertThat(product.getPrice(), is(BigDecimal.valueOf(4.5)));
+        assertThat(product.getName(), is("雪碧"));
+        assertThat(product.getPrice(), is(BigDecimal.valueOf(4.50).setScale(2)));
         assertThat(product.getUnit(), is("瓶"));
         assertThat(product.getTotalAmount(), is(10));
-        assertThat(product.getImgUrl(), is("/api/img/1"));
+        assertThat(product.getImgUrl(), is("/api/img/2"));
     }
 
 }
