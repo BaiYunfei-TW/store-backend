@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue(generator = "uuid")
+//    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String name;
@@ -70,5 +70,13 @@ public class Product {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
