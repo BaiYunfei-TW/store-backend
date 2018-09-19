@@ -36,6 +36,8 @@ public class ShoppingCartItemServiceTest {
         });
 
         ShoppingCartItem item = new ShoppingCartItem();
+        item.setProduct(new Product());
+        item.setUserId(1);
         item = shoppingCartItemService.addItemToCart(item);
 
         assertThat(item.getId(), is(shoppingCartItemId));

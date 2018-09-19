@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -73,5 +74,19 @@ public class ShoppingCartItemRepositoryTest {
         assertThat(items.size(), is(1));
         assertThat(items.get(0).getProduct(), equalTo(product));
         assertThat(items.get(0).getQuantity(), is(quantity));
+    }
+
+    @Test
+    public void should_return_exist_item_when_query_by_userId_and_productId() {
+        Integer userId = 1;
+        int quantity = 10;
+        Product product = new Product();
+        product.setId("020c823b-0753-4107-8216-13d38dde724c");
+        ShoppingCartItem existItem = new ShoppingCartItem(product, userId, quantity);
+
+        entityManager.persist(existItem);
+
+        Optional<ShoppingCartItem> findFromRepository = shoppingCartItemRepository.findByProductIdAndUserId(product.getId(), userId);
+        assertTrue(findFromRepository.isPresent());
     }
 }
