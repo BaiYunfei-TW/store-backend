@@ -52,7 +52,7 @@ public class ShoppingCartItemControllerTest {
         mockMvc.perform(post("/api/users/1/shoppingCartItems")
                 .content(gson.toJson(shoppingCartItem))
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk())
+            .andExpect(status().isCreated())
             .andExpect(jsonPath("id", is(shoppingCartItemId)));
     }
 

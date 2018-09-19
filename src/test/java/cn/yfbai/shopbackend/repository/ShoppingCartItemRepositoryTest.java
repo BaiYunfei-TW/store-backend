@@ -2,6 +2,8 @@ package cn.yfbai.shopbackend.repository;
 
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
+import org.flywaydb.core.Flyway;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,15 @@ public class ShoppingCartItemRepositoryTest {
 
     @Autowired
     private ShoppingCartItemRepository shoppingCartItemRepository;
+
+    @Autowired
+    Flyway flyway;
+
+    @Before
+    public void init() {
+        flyway.clean();
+        flyway.migrate();
+    }
 
     @Test
     public void should_return_shopping_cart_items_when_get_by_user_id() {

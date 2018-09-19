@@ -1,6 +1,8 @@
 package cn.yfbai.shopbackend.integation;
 
 import cn.yfbai.shopbackend.entity.Product;
+import org.flywaydb.core.Flyway;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,15 @@ public class ProductsIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Autowired
+    Flyway flyway;
+
+    @Before
+    public void init() {
+        flyway.clean();
+        flyway.migrate();
+    }
 
     @Test
     public void should_return_product_list_when_call_get_products_list() {
