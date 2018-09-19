@@ -35,7 +35,7 @@ public class ProductControllerTest {
         given(productService.getProducts()).willReturn(getProducts());
 
         mockMvc.perform(get("/api/products"))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$[0].name").value("可乐"))
                 .andExpect(jsonPath("$[1].name").value("雪碧"));
 
