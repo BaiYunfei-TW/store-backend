@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductsTests {
+public class ProductsTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
