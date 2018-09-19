@@ -1,4 +1,4 @@
-package cn.yfbai.shopbackend.controller;
+package cn.yfbai.shopbackend.integation;
 
 import cn.yfbai.shopbackend.entity.Product;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductsTest {
+public class ProductsIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
