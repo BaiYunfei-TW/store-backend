@@ -1,6 +1,7 @@
 package cn.yfbai.shopbackend.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class ShoppingCartItem {
@@ -55,4 +56,19 @@ public class ShoppingCartItem {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingCartItem that = (ShoppingCartItem) o;
+        return quantity == that.quantity &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(product, that.product) &&
+                Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, product, userId, quantity);
+    }
 }
