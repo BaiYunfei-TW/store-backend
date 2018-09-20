@@ -21,7 +21,10 @@ public class OrderService {
                 .setUserId(userId)
                 .setTotalPrice(getTotalPrice(shoppingCartItems));
         List<OrderDetail> orderDetails = new ArrayList<>(shoppingCartItems.size());
-        shoppingCartItems.forEach(item -> orderDetails.add(new OrderDetail())
+        shoppingCartItems.forEach(item -> orderDetails.add(
+                new OrderDetail()
+                        .setQuantity(item.getQuantity())
+                        .setProduct(item.getProduct()))
         );
         order.setOrderDetails(orderDetails);
         return orderRepository.save(order);

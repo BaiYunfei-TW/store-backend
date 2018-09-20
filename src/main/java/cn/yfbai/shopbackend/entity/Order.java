@@ -11,6 +11,7 @@ import java.util.Objects;
 @Table(name = "shopping_order")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private BigDecimal totalPrice;
     private Integer userId;
