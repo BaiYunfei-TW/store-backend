@@ -1,8 +1,13 @@
 package cn.yfbai.shopbackend.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
+@Entity
+@Table(name = "shopping_order")
 public class Order {
+    @Id
     private Integer id;
     private BigDecimal totalPrice;
     private Integer userId;
@@ -32,5 +37,20 @@ public class Order {
     public Order setUserId(Integer userId) {
         this.userId = userId;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(totalPrice, order.totalPrice) &&
+                Objects.equals(userId, order.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, totalPrice, userId);
     }
 }
