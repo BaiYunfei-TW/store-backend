@@ -2,6 +2,7 @@ package cn.yfbai.shopbackend.controller;
 
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
+import cn.yfbai.shopbackend.helpers.SyntaxSugar;
 import cn.yfbai.shopbackend.service.ShoppingCartItemService;
 import com.google.gson.Gson;
 import org.junit.Test;
@@ -35,13 +36,7 @@ public class ShoppingCartItemControllerTest {
     @Test
     public void should_add_product_to_shopping_cart_and_return_item_id() throws Exception {
         int shoppingCartItemId = 20893;
-
-        Integer userId = 1;
-        int quantity = 10;
-
-        Product product = new Product();
-        product.setId("020c823b-0753-4107-8216-13d38dde724c");
-        ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, userId, quantity);
+        ShoppingCartItem shoppingCartItem = SyntaxSugar.createShoppingCartItem().setId(shoppingCartItemId);
 
         given(shoppingCartItemService.addItemToCart(any())).will(invocation -> {
             ShoppingCartItem item = invocation.getArgument(0);

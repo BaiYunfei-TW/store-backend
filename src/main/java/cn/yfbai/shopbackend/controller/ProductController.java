@@ -22,10 +22,6 @@ public class ProductController {
     @GetMapping
     public List<Product> get() {
         return productService.getProducts();
-//        return Arrays.asList(
-//                new Product("可乐", "瓶", BigDecimal.valueOf(4.5), 10, "/api/img/1"),
-//                new Product("可乐", "瓶", BigDecimal.valueOf(4.5), 10, "/api/img/1")
-//        );
     }
 
 }

@@ -9,7 +9,7 @@ public class ShoppingCartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
     private Integer userId;
@@ -24,36 +24,40 @@ public class ShoppingCartItem {
         this.quantity = quantity;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public ShoppingCartItem setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public ShoppingCartItem setProduct(Product product) {
         this.product = product;
+        return this;
     }
 
     public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public ShoppingCartItem setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public ShoppingCartItem setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        return this;
     }
 
     @Override

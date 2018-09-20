@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-//    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String name;
@@ -32,51 +31,57 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public Product setId(String id) {
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Product setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+        return this;
     }
 
     public String getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public Product setUnit(String unit) {
         this.unit = unit;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Product setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
     }
 
     public Integer getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Integer totalAmount) {
+    public Product setTotalAmount(Integer totalAmount) {
         this.totalAmount = totalAmount;
+        return this;
     }
 
     public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
+    public Product setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        return this;
     }
 }
