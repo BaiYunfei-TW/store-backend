@@ -52,4 +52,10 @@ public class SyntaxSugar {
                 .setQuantity(1));
     }
 
+    public static BigDecimal getTotalPrice(List<ShoppingCartItem> shoppingCartItems) {
+        return shoppingCartItems.stream().map(item -> item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                .reduce((acc, num) -> acc.add(num))
+                .orElse(BigDecimal.ZERO);
+    }
+
 }

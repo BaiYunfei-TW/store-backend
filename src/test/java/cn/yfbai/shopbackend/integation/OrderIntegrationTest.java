@@ -71,7 +71,7 @@ public class OrderIntegrationTest {
         assertThat(orders.size(), is(1));
         assertThat(orders.get(0).getId(), notNullValue());
         assertThat(orders.get(0).getUserId(), is(SyntaxSugar.USER_ID));
-        assertThat(orders.get(0).getTotalPrice(), is(getTotalPrice(shoppingCartItemList)));
+        assertThat(orders.get(0).getTotalPrice(), is(SyntaxSugar.getTotalPrice(shoppingCartItemList)));
     }
 
     private List<Order> findOrdersByUserId(Integer userId) {
@@ -84,9 +84,4 @@ public class OrderIntegrationTest {
         });
     }
 
-    private BigDecimal getTotalPrice(List<ShoppingCartItem> shoppingCartItems) {
-        return shoppingCartItems.stream().map(item -> item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-                .reduce((acc, num) -> acc.add(num))
-                .orElse(BigDecimal.ZERO);
-    }
 }
