@@ -39,10 +39,11 @@ public class OrderRepositoryTest {
     @Test
     public void should_save_order_into_databse() {
         Order order = SyntaxSugar.createOrder();
-        orderRepository.save(order);
+        order = orderRepository.save(order);
 
         Order orderFromDatabase = entityManager.find(Order.class, order.getId());
 
         assertThat(orderFromDatabase, equalTo(order));
+        assertThat(orderFromDatabase.getOrderDetails().size(), equalTo(order.getOrderDetails().size()));
     }
 }

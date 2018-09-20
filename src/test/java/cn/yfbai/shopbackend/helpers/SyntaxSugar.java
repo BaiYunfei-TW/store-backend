@@ -1,6 +1,7 @@
 package cn.yfbai.shopbackend.helpers;
 
 import cn.yfbai.shopbackend.entity.Order;
+import cn.yfbai.shopbackend.entity.OrderDetail;
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
 import org.assertj.core.util.Lists;
@@ -12,6 +13,7 @@ public class SyntaxSugar {
 
     public static final int USER_ID = 1;
     public static final int ORDER_ID = 1;
+    public static final int QUANTITY = 1;
 
     public static Product createProduct() {
         return new Product()
@@ -43,15 +45,15 @@ public class SyntaxSugar {
     public static ShoppingCartItem createShoppingCartItem() {
         return new ShoppingCartItem()
                 .setProduct(createProduct())
-                .setUserId(1)
-                .setQuantity(1);
+                .setUserId(USER_ID)
+                .setQuantity(QUANTITY);
     }
 
     public static List<ShoppingCartItem> createShoppingCartItemList() {
         return Lists.newArrayList(new ShoppingCartItem()
                 .setProduct(createProduct())
-                .setUserId(1)
-                .setQuantity(1));
+                .setUserId(USER_ID)
+                .setQuantity(QUANTITY));
     }
 
     public static BigDecimal getTotalPrice(List<ShoppingCartItem> shoppingCartItems) {
@@ -64,7 +66,12 @@ public class SyntaxSugar {
         return new Order()
                 .setId(ORDER_ID)
                 .setTotalPrice(getTotalPrice(createShoppingCartItemList()))
-                .setUserId(USER_ID);
+                .setUserId(USER_ID)
+                .setOrderDetails(Lists.newArrayList(
+                        new OrderDetail()
+                                .setProduct(createProduct())
+                                .setQuantity(QUANTITY)
+                ));
     }
 
 }

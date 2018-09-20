@@ -14,7 +14,8 @@ public class Order {
     private Integer id;
     private BigDecimal totalPrice;
     private Integer userId;
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<OrderDetail> orderDetails;
 
     public Integer getId() {
@@ -63,7 +64,8 @@ public class Order {
         return orderDetails;
     }
 
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
+    public Order setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+        return this;
     }
 }
