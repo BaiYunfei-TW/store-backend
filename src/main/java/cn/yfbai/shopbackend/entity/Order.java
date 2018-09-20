@@ -7,27 +7,30 @@ public class Order {
     private BigDecimal totalPrice;
     private Integer userId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Integer getId() {
         return id;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public Order setId(Integer id) {
+        this.id = id;
+        return this;
     }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public Order setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+        return this;
     }
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public Order setUserId(Integer userId) {
+        this.userId = userId;
+        return this;
     }
 }
