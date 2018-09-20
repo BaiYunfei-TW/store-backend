@@ -22,7 +22,7 @@ public class OrderController {
 
     @PostMapping("/api/users/{userId}/orders")
     public ResponseEntity createOrder(@PathVariable Integer userId, @RequestBody List<ShoppingCartItem> shoppingCartItems) {
-        Order order = orderService.createOrder(shoppingCartItems);
+        Order order = orderService.createOrder(shoppingCartItems, userId);
         return ResponseEntity
                 .created(URI.create(String.format("/api/users/%d/orders/%d", order.getUserId(), order.getId())))
                 .build();

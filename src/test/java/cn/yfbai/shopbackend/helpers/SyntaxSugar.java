@@ -1,5 +1,6 @@
 package cn.yfbai.shopbackend.helpers;
 
+import cn.yfbai.shopbackend.entity.Order;
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
 import org.assertj.core.util.Lists;
@@ -10,6 +11,7 @@ import java.util.List;
 public class SyntaxSugar {
 
     public static final int USER_ID = 1;
+    public static final int ORDER_ID = 1;
 
     public static Product createProduct() {
         return new Product()
@@ -56,6 +58,13 @@ public class SyntaxSugar {
         return shoppingCartItems.stream().map(item -> item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce((acc, num) -> acc.add(num))
                 .orElse(BigDecimal.ZERO);
+    }
+
+    public static Order createOrder() {
+        return new Order()
+                .setId(ORDER_ID)
+                .setTotalPrice(getTotalPrice(createShoppingCartItemList()))
+                .setUserId(USER_ID);
     }
 
 }

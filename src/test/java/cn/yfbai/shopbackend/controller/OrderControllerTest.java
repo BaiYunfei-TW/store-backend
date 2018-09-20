@@ -42,9 +42,9 @@ public class OrderControllerTest {
     public void should_return_order_location_when_create_an_order() throws Exception {
         List<ShoppingCartItem> shoppingCartItemList = SyntaxSugar.createShoppingCartItemList();
 
-        given(orderService.createOrder(anyList())).will(invocation -> new Order()
+        given(orderService.createOrder(anyList(), any())).will(invocation -> new Order()
                 .setId(2)
-                .setUserId(1)
+                .setUserId(invocation.getArgument(1))
                 .setTotalPrice(SyntaxSugar.getTotalPrice(shoppingCartItemList)));
 
         mockMvc.perform(post("/api/users/1/orders")
@@ -53,6 +53,6 @@ public class OrderControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/api/users/1/orders/2"));
 
-        verify(orderService).createOrder(anyList());
+        verify(orderService).createOrder(anyList(), any());
     }
 }
