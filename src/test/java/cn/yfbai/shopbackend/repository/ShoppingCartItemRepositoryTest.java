@@ -2,6 +2,7 @@ package cn.yfbai.shopbackend.repository;
 
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
+import cn.yfbai.shopbackend.helpers.SyntaxSugar;
 import org.flywaydb.core.Flyway;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,33 +61,24 @@ public class ShoppingCartItemRepositoryTest {
 
     @Test
     public void should_return_shopping_cart_item_with_id_when_save_new_item() {
-        Integer userId = 1;
-        int quantity = 10;
-
-        Product product = new Product();
-        product.setId("020c823b-0753-4107-8216-13d38dde724c");
-        ShoppingCartItem shoppingCartItem = new ShoppingCartItem(product, userId, quantity);
+        ShoppingCartItem shoppingCartItem = SyntaxSugar.createShoppingCartItem();
 
         shoppingCartItem = shoppingCartItemRepository.save(shoppingCartItem);
         assertThat(shoppingCartItem.getId(), notNullValue());
 
-        List<ShoppingCartItem> items = shoppingCartItemRepository.findByUserId(userId);
+        List<ShoppingCartItem> items = shoppingCartItemRepository.findByUserId(shoppingCartItem.getUserId());
         assertThat(items.size(), is(1));
-        assertThat(items.get(0).getProduct(), equalTo(product));
-        assertThat(items.get(0).getQuantity(), is(quantity));
+        assertThat(items.get(0).getProduct(), equalTo(shoppingCartItem.getProduct()));
+        assertThat(items.get(0).getQuantity(), is(shoppingCartItem.getQuantity()));
     }
 
     @Test
     public void should_return_exist_item_when_query_by_userId_and_productId() {
-        Integer userId = 1;
-        int quantity = 10;
-        Product product = new Product();
-        product.setId("020c823b-0753-4107-8216-13d38dde724c");
-        ShoppingCartItem existItem = new ShoppingCartItem(product, userId, quantity);
+        ShoppingCartItem existItem = SyntaxSugar.createShoppingCartItem();
 
         entityManager.persist(existItem);
 
-        Optional<ShoppingCartItem> findFromRepository = shoppingCartItemRepository.findByProductIdAndUserId(product.getId(), userId);
+        Optional<ShoppingCartItem> findFromRepository = shoppingCartItemRepository.findByProductIdAndUserId(existItem.getProduct().getId(), existItem.getUserId());
         assertTrue(findFromRepository.isPresent());
     }
 }

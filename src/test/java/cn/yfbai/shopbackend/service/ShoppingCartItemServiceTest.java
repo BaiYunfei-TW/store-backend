@@ -2,6 +2,7 @@ package cn.yfbai.shopbackend.service;
 
 import cn.yfbai.shopbackend.entity.Product;
 import cn.yfbai.shopbackend.entity.ShoppingCartItem;
+import cn.yfbai.shopbackend.helpers.SyntaxSugar;
 import cn.yfbai.shopbackend.repository.ShoppingCartItemRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,21 +46,12 @@ public class ShoppingCartItemServiceTest {
 
     @Test
     public void should_add_quantity_of_item_when_the_item_exist_in_shopping_cart() {
-        int shoppingCartItemId = 1;
-        int userId = 1;
-
-        String productId = "020c823b-0753-4107-8216-13d38dde724c";
-        Product existProduct = new Product();
-        existProduct.setId(productId);
+        Product existProduct = SyntaxSugar.createProduct();
 
         int existQuantity = 1;
-        ShoppingCartItem existItem = new ShoppingCartItem();
-        existItem.setId(shoppingCartItemId);
-        existItem.setProduct(existProduct);
-        existItem.setUserId(userId);
-        existItem.setQuantity(existQuantity);
+        ShoppingCartItem existItem = SyntaxSugar.createShoppingCartItem();
 
-        given(shoppingCartItemRepository.findByProductIdAndUserId(productId, userId)).willReturn(Optional.of(existItem));
+        given(shoppingCartItemRepository.findByProductIdAndUserId(existProduct.getId(), existItem.getUserId())).willReturn(Optional.of(existItem));
         given(shoppingCartItemRepository.save(any())).will(invocation -> {
             ShoppingCartItem item = invocation.getArgument(0);
             item.setId(existItem.getId());
@@ -68,7 +60,8 @@ public class ShoppingCartItemServiceTest {
 
         ShoppingCartItem addedItem = new ShoppingCartItem();
         addedItem.setProduct(existProduct);
-        addedItem.setUserId(userId);
+        addedItem.setUserId(existItem.getUserId());
+
         int newQuantity = 10;
         addedItem.setQuantity(newQuantity);
 
