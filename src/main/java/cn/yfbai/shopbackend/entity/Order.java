@@ -1,7 +1,10 @@
 package cn.yfbai.shopbackend.entity;
 
+import org.hibernate.annotations.NotFound;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +14,8 @@ public class Order {
     private Integer id;
     private BigDecimal totalPrice;
     private Integer userId;
+    @Transient
+    private List<OrderDetail> orderDetails;
 
     public Integer getId() {
         return id;
@@ -52,5 +57,13 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(id, totalPrice, userId);
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

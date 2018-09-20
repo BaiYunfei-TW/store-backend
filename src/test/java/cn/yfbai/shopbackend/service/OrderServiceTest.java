@@ -41,6 +41,7 @@ public class OrderServiceTest {
         assertThat(order.getId(), is(SyntaxSugar.ORDER_ID));
         assertThat(order.getUserId(), is(SyntaxSugar.USER_ID));
         assertThat(order.getTotalPrice(), is(SyntaxSugar.getTotalPrice(shoppingCartItemList)));
+        assertThat(order.getOrderDetails().size(), is(shoppingCartItemList.size()));
 
         verify(orderRepository).save(any(Order.class));
     }
