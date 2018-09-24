@@ -26,20 +26,21 @@ public class SyntaxSugar {
     }
 
     public static List<Product> createProductList() {
-        return Lists.newArrayList(new Product()
-                .setId("020c823b-0753-4107-8216-13d38dde724c")
+        return Lists.newArrayList(
+            new Product()
+                .setId("7b2d3294-a251-4958-91d0-1160f1cee1e8")
                 .setName("可乐")
                 .setPrice(BigDecimal.valueOf(4.5))
                 .setTotalAmount(10)
                 .setUnit("瓶")
-                .setImgUrl("/api/img/2"),
-                new Product()
+                .setImgUrl("/api/img/1"),
+            new Product()
                 .setId("020c823b-0753-4107-8216-13d38dde724c")
                 .setName("雪碧")
                 .setPrice(BigDecimal.valueOf(4.5))
                 .setTotalAmount(10)
                 .setUnit("瓶")
-                .setImgUrl("/api/img/1"));
+                .setImgUrl("/api/img/2"));
     }
 
     public static ShoppingCartItem createShoppingCartItem() {
