@@ -1,16 +1,16 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.5.RELEASE'
-		springCloudContractVersion = '2.0.1.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:${springCloudContractVersion}"
-		classpath("org.flywaydb:flyway-gradle-plugin:5.0.7")
-	}
+    ext {
+        springBootVersion = '2.0.5.RELEASE'
+        springCloudContractVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:${springCloudContractVersion}"
+        classpath("org.flywaydb:flyway-gradle-plugin:5.0.7")
+    }
 }
 
 apply plugin: 'java'
@@ -25,31 +25,57 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencyManagement {
-	imports {
-		mavenBom 'org.springframework.cloud:spring-cloud-contract-dependencies:2.0.1.RELEASE'
-	}
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-contract-dependencies:2.0.1.RELEASE'
+    }
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.flywaydb:flyway-core')
-	compile('com.google.code.gson:gson:2.8.5')
-	compile('mysql:mysql-connector-java')
-	testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.flywaydb:flyway-core')
+    compile('com.google.code.gson:gson:2.8.5')
+    compile('mysql:mysql-connector-java')
+    testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 flyway {
-	url = 'jdbc:mysql://localhost:3306/shop'
-	user = 'root'
-	password = '123456'
+    url = 'jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=utf-8'
+    user = 'root'
+    password = '123456'
 }
 
 contracts {
-	baseClassForTests = 'cn.yfbai.shopbackend.BaseMvcTest'
+    baseClassForTests = 'cn.yfbai.shopbackend.BaseMvcTest'
+}
+
+import org.springframework.boot.gradle.tasks.run.BootRun
+
+task server1(type: BootRun) {
+    classpath = sourceSets.main.runtimeClasspath
+    main= 'cn.yfbai.shopbackend.ShopBackendApplication'
+    systemProperty 'spring.profiles.active', 'server_1'
+}
+
+task server2(type: BootRun)  {
+    classpath = sourceSets.main.runtimeClasspath
+    main= 'cn.yfbai.shopbackend.ShopBackendApplication'
+    systemProperty 'spring.profiles.active', 'server_2'
+}
+
+task server3(type: BootRun)  {
+    classpath = sourceSets.main.runtimeClasspath
+    main= 'cn.yfbai.shopbackend.ShopBackendApplication'
+    systemProperty 'spring.profiles.active', 'server_3'
+}
+
+task server4(type: BootRun)  {
+    classpath = sourceSets.main.runtimeClasspath
+    main= 'cn.yfbai.shopbackend.ShopBackendApplication'
+    systemProperty 'spring.profiles.active', 'server_4'
 }
